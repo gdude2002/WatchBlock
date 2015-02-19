@@ -71,7 +71,7 @@ public class WatchBlock extends JavaPlugin
     
     public void onDisable() {
         final PluginDescriptionFile pdfFile = this.getDescription();
-        System.out.println("[" + pdfFile.getName() + "]" + " version " + pdfFile.getVersion() + " is disabled!");
+        System.out.println("[WatchBlock]" + " version " + pdfFile.getVersion() + " is disabled!");
         if (!WatchBlock.flatfile) {
             try {
                 this.pool.close();
@@ -276,7 +276,6 @@ public class WatchBlock extends JavaPlugin
                 System.out.println("[WatchBlock] Section not found in Exclude.yml");
             }
         }
-        final PluginDescriptionFile pdfFile = this.getDescription();
         if (!WatchBlock.flatfile) {
             try {
                 this.pool = new MySQLConnectionPool("jdbc:mysql://" + hostname + ":" + port + "/" + database, username, password, poolsize);
