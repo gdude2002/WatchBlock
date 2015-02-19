@@ -291,7 +291,7 @@ public class FlatFileAntiGrief implements Listener
             final String blocklocation = String.valueOf(block.getLocation().getBlockX()) + "," + block.getLocation().getBlockY() + "," + block.getLocation().getBlockZ();
             final YamlConfiguration flats2 = this.plugin.getConfig(new File(worldpath + File.separator + chunkname));
             final String whoplaced2 = this.ownedBy(event.getBlock().getLocation().getBlock(), new File("plugins" + File.separator + "WatchBlock" + File.separator + player.getWorld().getName()));
-            if ((this.plugin.getVault().has(player, "watchblock.admin") || player.isOp()) && player.getItemInHand().getType().compareTo((Enum)Material.getMaterial(WatchBlock.adminstick)) == 0) {
+            if ((this.plugin.getVault().has(player, "watchblock.admin") || player.isOp()) && player.getItemInHand().getType().compareTo(Material.getMaterial(WatchBlock.adminstick)) == 0) {
                 if (whoplaced2 != null && whoplaced2 != "") {
                     String chatmsg2 = WatchBlock.adminmsg;
                     try {
@@ -356,7 +356,7 @@ public class FlatFileAntiGrief implements Listener
             for (final Block above : blocksaround) {
                 String test = null;
                 String owner = null;
-                if (event.getBlock().getType().compareTo((Enum)Material.AIR) != 0) {
+                if (event.getBlock().getType().compareTo(Material.AIR) != 0) {
                     test = this.ownedBy(above, new File("plugins" + File.separator + "WatchBlock" + File.separator + player.getWorld().getName()));
                     owner = String.valueOf(above.getLocation().getBlockX()) + "," + above.getLocation().getBlockY() + "," + above.getLocation().getBlockZ();
                 }

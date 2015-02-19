@@ -287,7 +287,7 @@ public class AntiGrief implements Listener
         catch (NullPointerException ex) {}
         catch (ArrayIndexOutOfBoundsException ex2) {}
         if (playername == null || id == null) {
-            if ((this.plugin.getVault().has(player, "watchblock.admin") || player.isOp()) && player.getItemInHand().getType().compareTo((Enum)Material.getMaterial(WatchBlock.adminstick)) == 0) {
+            if ((this.plugin.getVault().has(player, "watchblock.admin") || player.isOp()) && player.getItemInHand().getType().compareTo(Material.getMaterial(WatchBlock.adminstick)) == 0) {
                 String chatmsg = WatchBlock.adminmsg;
                 try {
                     chatmsg = WatchBlock.adminmsg.replace("$player", " Nobody");
@@ -329,7 +329,7 @@ public class AntiGrief implements Listener
             return;
         }
         playerfix = false;
-        if ((this.plugin.getVault().has(player, "watchblock.admin") || player.isOp()) && player.getItemInHand().getType().compareTo((Enum)Material.getMaterial(WatchBlock.adminstick)) == 0) {
+        if ((this.plugin.getVault().has(player, "watchblock.admin") || player.isOp()) && player.getItemInHand().getType().compareTo(Material.getMaterial(WatchBlock.adminstick)) == 0) {
             String adminmsg = WatchBlock.adminmsg;
             try {
                 adminmsg = WatchBlock.adminmsg.replace("$player", playername);
@@ -349,7 +349,7 @@ public class AntiGrief implements Listener
     
     @EventHandler(priority = EventPriority.HIGH)
     public void onBlockPlace(final BlockPlaceEvent event) {
-        if (WatchBlock.worlds.contains(event.getBlock().getWorld().getName()) && !WatchBlock.toggle.containsKey(event.getPlayer().getName()) && !event.isCancelled() && event.getBlock().getType().compareTo((Enum)Material.SAPLING) != 0) {
+        if (WatchBlock.worlds.contains(event.getBlock().getWorld().getName()) && !WatchBlock.toggle.containsKey(event.getPlayer().getName()) && !event.isCancelled() && event.getBlock().getType().compareTo(Material.SAPLING) != 0) {
             if (!WatchBlock.protectaround && !WatchBlock.excludeblocks.contains(String.valueOf(event.getBlock().getTypeId()))) {
                 if (this.plugin.getVault().has(event.getPlayer(), "watchblock.protect")) {
                     this.plugin.getSQLQueueInstance().addBlock(event.getBlock().getWorld().getName(), event.getPlayer().getName(), event.getBlock().getX(), event.getBlock().getY(), event.getBlock().getZ(), event.getBlock().getChunk().getX(), event.getBlock().getChunk().getZ());
@@ -388,7 +388,7 @@ public class AntiGrief implements Listener
                                 if (delete_flat) {
                                     final Object localObject = removeoldowner.iterator();
                                     while (((Iterator)localObject).hasNext()) {
-                                        final String removeme = ((Iterator)localObject).next();
+                                        final String removeme = (String) ((Iterator)localObject).next();
                                         this.plugin.getSQLQueueInstance().removeBlock(removeme, world);
                                     }
                                 }

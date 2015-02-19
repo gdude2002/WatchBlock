@@ -21,7 +21,7 @@ public class ChestListener implements Listener
     public void onChestUse(final PlayerInteractEvent event) {
         final String player = event.getPlayer().getName();
         if (WatchBlock.flatfile) {
-            if (event.getClickedBlock() != null && event.getClickedBlock().getType().compareTo((Enum)Material.CHEST) == 0) {
+            if (event.getClickedBlock() != null && event.getClickedBlock().getType().compareTo(Material.CHEST) == 0) {
                 final String blockowner = this.ownedBy(event.getClickedBlock(), new File("plugins" + File.separator + "WatchBlock" + File.separator + event.getClickedBlock().getWorld().getName()));
                 if (!event.getPlayer().isOp() && !this.plugin.getVault().has(event.getPlayer(), "watchblock.admin") && player != null && !player.equalsIgnoreCase(blockowner) && blockowner != null && blockowner != "") {
                     try {
@@ -40,7 +40,7 @@ public class ChestListener implements Listener
                 }
             }
         }
-        else if (event.getClickedBlock() != null && event.getClickedBlock().getType().compareTo((Enum)Material.CHEST) == 0) {
+        else if (event.getClickedBlock() != null && event.getClickedBlock().getType().compareTo(Material.CHEST) == 0) {
             final String ownedby = WatchBlock.queue.getBlock(event.getClickedBlock().getWorld().getName(), "", event.getClickedBlock().getX(), event.getClickedBlock().getY(), event.getClickedBlock().getZ(), event.getClickedBlock().getChunk().getX(), event.getClickedBlock().getChunk().getZ());
             String blockowner2 = null;
             if (ownedby.length() > 2) {

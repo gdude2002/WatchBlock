@@ -25,7 +25,8 @@ public class MySQLConnectionPool implements Closeable
         this.user = user;
         this.password = password;
         this.connections = new Vector<JDCConnection>(this.poolsize);
-        (this.reaper = new ConnectionReaper((ConnectionReaper)null)).start();
+        this.reaper = new ConnectionReaper();
+        this.reaper.start();
     }
     
     @Override

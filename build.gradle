@@ -30,12 +30,18 @@ repositories {
         url "https://hub.spigotmc.org/nexus/content/groups/public/"
         name "Spigot"
     }
+
+    maven {
+        url "http://maven.sk89q.com/artifactory/repo/"
+        name "sk89q"
+    }
 }
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.11'
     compile "org.bukkit:bukkit:1.7.9-R0.2"
     compile "net.milkbowl.vault:VaultAPI:1.5"
+    compile "com.sk89q.worldedit:worldedit-bukkit:6.0.1"
 }
 
 jar {
@@ -48,5 +54,6 @@ shadowJar {
     dependencies {
         exclude(dependency("net.milkbowl.vault:VaultAPI:1.5"))
         exclude(dependency("org.bukkit:bukkit:1.7.9-R0.2"))
+        exclude(dependency("com.sk89q.worldedit:worldedit-bukkit:6.0.1"))
     }
 }

@@ -121,11 +121,12 @@ public class WatchBlock extends JavaPlugin
     
     public void loadConf() {
         final YamlConfiguration c = this.getConfig(WatchBlock.configfile);
-        final Map<String, Object> worldmap = (Map<String, Object>)c.getConfigurationSection("worlds").getValues(true);
-        for (final Map.Entry e : worldmap.entrySet()) {
-            if (Boolean.valueOf(e.getValue())) {
-                WatchBlock.worlds.add(e.getKey());
-                System.out.println("[WatchBlock] Activated worlds : " + e.getKey());
+        final Map<String, Object> worldmap = c.getConfigurationSection("worlds").getValues(true);
+        for (final String key : worldmap.keySet()) {
+            Object value = worldmap.get(key);
+            if ((Boolean) value) {
+                WatchBlock.worlds.add(key);
+                System.out.println("[WatchBlock] Activated worlds : " + key);
             }
         }
         try {
@@ -414,7 +415,7 @@ public class WatchBlock extends JavaPlugin
                                 final File worldpath = new File("plugins" + File.separator + "WatchBlock" + File.separator + world.getName());
                                 final Location max = select.getMaximumPoint();
                                 final Location min = select.getMinimumPoint();
-                                final HashMap<String, LinkedList> tempmap = new HashMap<String, LinkedList>();
+                                final HashMap<String, LinkedList<Location>> tempmap = new HashMap<String, LinkedList<Location>>();
                                 for (int x = min.getBlockX(); x <= max.getBlockX(); ++x) {
                                     for (int y = min.getBlockY(); y <= max.getBlockY(); ++y) {
                                         for (int z = min.getBlockZ(); z <= max.getBlockZ(); ++z) {
@@ -422,16 +423,17 @@ public class WatchBlock extends JavaPlugin
                                             if (loc.getBlock().getType() != Material.AIR && loc.getBlock().getType() != Material.LAVA && loc.getBlock().getType() != Material.WATER && !WatchBlock.excludeblocks.contains(String.valueOf(loc.getBlock().getTypeId()))) {
                                                 final String chunkname = String.valueOf(loc.getChunk().getX()) + "." + loc.getChunk().getZ() + ".yml";
                                                 if (tempmap.get(chunkname) == null) {
-                                                    tempmap.put(chunkname, new LinkedList());
+                                                    tempmap.put(chunkname, new LinkedList<Location>());
                                                 }
                                                 tempmap.get(chunkname).add(loc);
                                             }
                                         }
                                     }
-                                    for (final Map.Entry e : tempmap.entrySet()) {
-                                        final File customConfigFile = new File(worldpath + File.separator + e.getKey());
-                                        final FileConfiguration flats = (FileConfiguration)YamlConfiguration.loadConfiguration(customConfigFile);
-                                        for (final Location location : e.getValue()) {
+                                    for (final String key : tempmap.keySet()) {
+                                        LinkedList<Location> value = tempmap.get(key);
+                                        final File customConfigFile = new File(worldpath + File.separator + key);
+                                        final FileConfiguration flats = YamlConfiguration.loadConfiguration(customConfigFile);
+                                        for (final Location location : value) {
                                             flats.set(String.valueOf(location.getBlockX()) + "," + location.getBlockY() + "," + location.getBlockZ() + ".player", (Object)newowner);
                                         }
                                         try {
@@ -500,7 +502,7 @@ public class WatchBlock extends JavaPlugin
                                 final File worldpath = new File("plugins" + File.separator + "WatchBlock" + File.separator + world.getName());
                                 final Location max = select.getMaximumPoint();
                                 final Location min = select.getMinimumPoint();
-                                final HashMap<String, LinkedList> tempmap = new HashMap<String, LinkedList>();
+                                final HashMap<String, LinkedList<Location>> tempmap = new HashMap<String, LinkedList<Location>>();
                                 for (int x = min.getBlockX(); x <= max.getBlockX(); ++x) {
                                     for (int y = min.getBlockY(); y <= max.getBlockY(); ++y) {
                                         for (int z = min.getBlockZ(); z <= max.getBlockZ(); ++z) {
@@ -508,18 +510,19 @@ public class WatchBlock extends JavaPlugin
                                             if (loc.getBlock().getType() != Material.AIR && loc.getBlock().getType() != Material.LAVA && loc.getBlock().getType() != Material.WATER && !WatchBlock.excludeblocks.contains(String.valueOf(loc.getBlock().getTypeId()))) {
                                                 final String chunkname = String.valueOf(loc.getChunk().getX()) + "." + loc.getChunk().getZ() + ".yml";
                                                 if (tempmap.get(chunkname) == null) {
-                                                    tempmap.put(chunkname, new LinkedList());
+                                                    tempmap.put(chunkname, new LinkedList<Location>());
                                                 }
                                                 tempmap.get(chunkname).add(loc);
                                             }
                                         }
                                     }
-                                    for (final Map.Entry e : tempmap.entrySet()) {
-                                        final File customConfigFile = new File(worldpath + File.separator + e.getKey());
-                                        final FileConfiguration flats = (FileConfiguration)YamlConfiguration.loadConfiguration(customConfigFile);
-                                        for (final Location location : e.getValue()) {
+                                    for (final String key : tempmap.keySet()) {
+                                        LinkedList<Location> value = tempmap.get(key);
+                                        final File customConfigFile = new File(worldpath + File.separator + key);
+                                        final FileConfiguration flats = YamlConfiguration.loadConfiguration(customConfigFile);
+                                        for (final Location location : value) {
                                             if (flats.getString(String.valueOf(location.getBlockX()) + "," + location.getBlockY() + "," + location.getBlockZ() + ".player", "").equalsIgnoreCase(cmdsender)) {
-                                                flats.set(String.valueOf(location.getBlockX()) + "," + location.getBlockY() + "," + location.getBlockZ() + ".player", (Object)newowner);
+                                                flats.set(String.valueOf(location.getBlockX()) + "," + location.getBlockY() + "," + location.getBlockZ() + ".player", newowner);
                                             }
                                         }
                                         try {
