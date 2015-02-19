@@ -295,10 +295,6 @@ public class WatchBlock extends JavaPlugin
         else {
             this.getServer().getPluginManager().registerEvents((Listener)new FlatFileAntiGrief(this), (Plugin)this);
         }
-        if (!pdfFile.getName().equalsIgnoreCase("WatchBlock")) {
-            System.err.print("This plugin was stolen. Report it to slade87");
-            System.exit(-1);
-        }
         final WorldEditPlugin wePlugin = (WorldEditPlugin)this.getServer().getPluginManager().getPlugin("WorldEdit");
         if (wePlugin != null) {
             WatchBlock.worldEdit = wePlugin;
