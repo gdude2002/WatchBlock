@@ -1,0 +1,44 @@
+name: WatchBlock
+main: tk.minecraftopia.watchblock.WatchBlock
+version: 2.31
+description: WatchBlock Protection Plugin
+authors: [slade87, enigma617]
+depend: [Vault]
+softdepend: [Multiverse-Core,MultiWorld,WorldEdit]
+commands:
+  wallow:
+    description: allows a player to destroy your blocks
+    usage: |
+      /<command> playername
+  wremove:
+    description: removes a player from being allow to destroy your blocks
+    usage: |
+      /<command> playername
+  bananaprotect-import:
+    description: Imports BananaProtect files
+    usage: |
+      /<command> world
+  wlist:
+    description: Shows all Added Players
+    usage: |
+      /<command>
+  wtoggle:
+    description: Toggle Protection off or on
+    usage: |
+      /<command> on/off
+  wb-import:
+    description: Import/Export Database
+    usage: |
+      /<command> on/off
+  wreload:
+    description: Reload the Config.yml
+    usage: |
+      /<command>
+  wtransfer:
+    description: Transfer Blocks to new Owner
+    usage: |
+      /<command>
+  wdeleteplayer:
+    description: Deletes a Player and his Blocks.
+    usage: |
+      /<command>
