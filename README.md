@@ -3,7 +3,7 @@ A change of plans
 
 The code here is so difficult to work with that I eventually decided to rewrite this plugin. For the sake of
 keeping a history, I'm going to leave this repo up with the original contents of my README below, but you
-can find my new plugin [right overe here](https://github.com/TheArchives/ArchBlock).
+can find my new plugin [right over here](https://github.com/TheArchives/ArchBlock).
 
 ---
 
